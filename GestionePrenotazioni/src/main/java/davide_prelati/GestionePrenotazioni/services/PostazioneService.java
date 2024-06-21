@@ -1,6 +1,7 @@
 package davide_prelati.GestionePrenotazioni.services;
 
 import davide_prelati.GestionePrenotazioni.entities.Postazione;
+import davide_prelati.GestionePrenotazioni.enums.Tipo;
 import davide_prelati.GestionePrenotazioni.repositories.PostazioneRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ public class PostazioneService {
 
     public Postazione getPostazioneById(Long id) {
         return postazioneRepository.findById(id).orElse(null);
+    }
+
+    public List<Postazione> findByTipoAndCitta(Tipo tipo, String citta) {
+        return postazioneRepository.findByTipoAndEdificio_Citta(tipo, citta);
     }
 
     public void deletePostazione(Long id) {
