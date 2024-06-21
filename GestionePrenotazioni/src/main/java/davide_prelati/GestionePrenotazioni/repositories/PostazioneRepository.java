@@ -10,11 +10,6 @@ import java.util.List;
 
 @Repository
 public interface PostazioneRepository extends JpaRepository<Postazione, Long> {
-    @Override
-    List<Postazione> findAll();
-
-    @Override
-    List<Postazione> findAllById(Iterable<Long> longs);
 
     List<Postazione> findByDescription(String descrizione);
 

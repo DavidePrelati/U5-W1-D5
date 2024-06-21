@@ -9,8 +9,6 @@ import java.util.List;
 @Repository
 public interface EdificioRepository extends JpaRepository<Edificio, Long> {
 
-    @Override
-    List<Edificio> findAll();
 
     List<Edificio> findByName(String nome);
 
@@ -20,6 +18,4 @@ public interface EdificioRepository extends JpaRepository<Edificio, Long> {
 
     List<Edificio> findByNameIn(List<String> nomi);
 
-    @Override
-    List<Edificio> findAllById(Iterable<Long> longs);
 }
