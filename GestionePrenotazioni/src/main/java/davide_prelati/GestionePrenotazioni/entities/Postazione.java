@@ -20,6 +20,7 @@ public class Postazione {
     private long id;
     private String descrizione;
     private Tipo tipo;
+    private int max_occupanti;
 
     @ManyToOne
     @JoinColumn(name = "id_edificio")
@@ -28,11 +29,12 @@ public class Postazione {
     @OneToMany(mappedBy = "postazione")
     private List<Prenotazione> prenotazioni;
 
-    public Postazione(String descrizione, Tipo tipo, Edificio edificio, List<Prenotazione> prenotazioni) {
+
+    public Postazione(String descrizione, Tipo tipo, int max_occupanti, Edificio edificio, List<Prenotazione> prenotazioni) {
         this.descrizione = descrizione;
         this.tipo = tipo;
+        this.max_occupanti = max_occupanti;
         this.edificio = edificio;
         this.prenotazioni = prenotazioni;
     }
-
 }
