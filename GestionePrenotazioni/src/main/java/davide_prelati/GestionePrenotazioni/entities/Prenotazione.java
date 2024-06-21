@@ -1,10 +1,7 @@
 package davide_prelati.GestionePrenotazioni.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +20,17 @@ public class Prenotazione {
     private long id;
     private LocalDate data;
 
-    public Prenotazione(LocalDate data) {
+    @ManyToOne
+    @JoinColumn(name = "id_utente")
+    private Utente utente;
+
+    @ManyToOne
+    @JoinColumn(name = "id_postazione")
+    private Postazione postazione;
+
+    public Prenotazione(LocalDate data, Utente utente, Postazione postazione) {
         this.data = data;
+        this.utente = utente;
+        this.postazione = postazione;
     }
 }

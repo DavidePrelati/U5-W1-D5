@@ -1,13 +1,12 @@
 package davide_prelati.GestionePrenotazioni.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,9 +21,13 @@ public class Utente {
     private String cognome;
     private String email;
 
-    public Utente(String nome, String cognome, String email) {
+    @OneToMany(mappedBy = "utente")
+    private List<Prenotazione> prenotazioni;
+
+    public Utente(String nome, String cognome, String email, List<Prenotazione> prenotazioni) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
+        this.prenotazioni = prenotazioni;
     }
 }

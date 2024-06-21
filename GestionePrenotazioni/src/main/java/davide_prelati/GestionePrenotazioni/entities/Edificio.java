@@ -1,14 +1,13 @@
 package davide_prelati.GestionePrenotazioni.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,9 +22,14 @@ public class Edificio {
     private String nome;
     private String citta;
 
-    public Edificio(String indirizzo, String nome, String citta) {
+    @OneToMany(mappedBy = "edificio")
+    private List<Postazione> postazioni;
+
+    public Edificio(String indirizzo, String nome, String citta, List<Postazione> postazioni) {
         this.indirizzo = indirizzo;
         this.nome = nome;
         this.citta = citta;
+        this.postazioni = postazioni;
     }
+
 }

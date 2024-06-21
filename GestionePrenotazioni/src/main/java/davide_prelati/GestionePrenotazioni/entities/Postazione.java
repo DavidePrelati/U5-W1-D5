@@ -1,14 +1,13 @@
 package davide_prelati.GestionePrenotazioni.entities;
 
 import davide_prelati.GestionePrenotazioni.enums.Tipo;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,8 +21,18 @@ public class Postazione {
     private String descrizione;
     private Tipo tipo;
 
-    public Postazione(String descrizione, Tipo tipo) {
+    @ManyToOne
+    @JoinColumn(name = "id_edificio")
+    private Edificio edificio;
+
+    @OneToMany(mappedBy = "postazione")
+    private List<Prenotazione> prenotazioni;
+
+    public Postazione(String descrizione, Tipo tipo, Edificio edificio, List<Prenotazione> prenotazioni) {
         this.descrizione = descrizione;
         this.tipo = tipo;
+        this.edificio = edificio;
+        this.prenotazioni = prenotazioni;
     }
+
 }
