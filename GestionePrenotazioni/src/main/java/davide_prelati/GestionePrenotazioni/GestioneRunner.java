@@ -73,22 +73,32 @@ public class GestioneRunner implements CommandLineRunner {
         utente2.setEmail("igor.miti@gmail.com");
         utenteService.saveUtente(utente2);
 
-        // Creazione di prenotazioni di esempio
+
         LocalDate date1 = LocalDate.of(2024, 11, 22);
 
-        Prenotazione prenotazione1 = new Prenotazione();
-        prenotazione1.setData(date1);
-        prenotazione1.setUtente(utente1);
-        prenotazione1.setPostazione(postazione1);
-        prenotazioneService.savePrenotazione(prenotazione1);
+        if (prenotazioneService.isPostazioneAvailable(postazione1.getId(), date1) == true) {
+            Prenotazione prenotazione1 = new Prenotazione();
+            prenotazione1.setData(date1);
+            prenotazione1.setUtente(utente1);
+            prenotazione1.setPostazione(postazione1);
+            prenotazioneService.savePrenotazione(prenotazione1);
+            System.out.println("Prenotazione 1 creata con successo.");
+        } else {
+            System.out.println("Postazione 1 non disponibile per la data " + date1);
+        }
 
-        LocalDate date2 = LocalDate.of(2024, 6, 25);
+        LocalDate date2 = LocalDate.of(2024, 6, 26);
 
-        Prenotazione prenotazione2 = new Prenotazione();
-        prenotazione2.setData(date2);
-        prenotazione2.setUtente(utente2);
-        prenotazione2.setPostazione(postazione2);
-        prenotazioneService.savePrenotazione(prenotazione2);
+        if (prenotazioneService.isPostazioneAvailable(postazione2.getId(), date2)) {
+            Prenotazione prenotazione2 = new Prenotazione();
+            prenotazione2.setData(date2);
+            prenotazione2.setUtente(utente2);
+            prenotazione2.setPostazione(postazione2);
+            prenotazioneService.savePrenotazione(prenotazione2);
+            System.out.println("Prenotazione 2 creata con successo.");
+        } else {
+            System.out.println("Postazione 2 non disponibile per la data " + date2);
+        }
 
         List<Postazione> postazioni = postazioneService.findByTipoAndCitta(Tipo.PRIVATO, "Roma");
         postazioni.forEach(postazione -> {

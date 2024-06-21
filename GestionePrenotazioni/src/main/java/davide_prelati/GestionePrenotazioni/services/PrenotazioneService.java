@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,6 +28,10 @@ public class PrenotazioneService {
         return prenotazioneRepository.findById(id).orElse(null);
     }
 
+    public boolean isPostazioneAvailable(Long postazioneId, LocalDate data) {
+        List<Prenotazione> prenotazioni = prenotazioneRepository.findByPostazioneAndData(postazioneId, data);
+        return prenotazioni.isEmpty();
+    }
 
     public void deletePrenotazione(Long id) {
         prenotazioneRepository.deleteById(id);
